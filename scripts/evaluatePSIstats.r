@@ -44,6 +44,15 @@ sufP01 <- "prAplus01_tend1000.dat"
 datp01 <- readPTtypes(prefs=prefsDat, typenames=typesDat, suf=sufP01)
 datp01
 
+## Boundary:
+sufP00 <- "prAplus00_tend1000.dat"
+datp00 <- readPTtypes(prefs=prefsDat, typenames=typesDat, suf=sufP00)
+datp00
+
+sufP10 <- "prAplus100_tend1000.dat"
+datp10 <- readPTtypes(prefs=prefsDat, typenames=typesDat, suf=sufP10)
+datp10
+
 ###
 
 datp01$pAplus <- 0.1
@@ -52,12 +61,17 @@ datp05$pAplus <- 0.5
 datp07$pAplus <- 0.7
 datp09$pAplus <- 0.9
 
+datp00$pAplus <- 0.0
+datp10$pAplus <- 1.0
+
 dataComplete <- rbind(
+    datp00, # new 
     datp01,
     datp03,
     datp05,
     datp07,
     datp09
+    ,datp10 # new 
 )
 dataComplete
 
@@ -148,7 +162,7 @@ pdf("ObjectRecognition_pAplus_agreeable_independent.pdf")
 par(mar=c(5.1,5.1,4.1,2.1), cex=1.2, cex.axis=1.75, cex.lab=1.75, lwd=1.5)
 plotSystemActivities(dataComplete, types=c("agreeable", "independent"),
                      syst="OR",
-                     xlab=expression(p["A"^"+"]),
+                     xlab=expression(p^"+"),#expression(p["A"^"+"]),
                      col=c(AG.col, IN.col)
                                         #cex=1.5,cex.axis=2,cex.lab=2, lwd=1.5
                      )
@@ -161,7 +175,7 @@ pdf("ObjectRecognition_pAplus_conscientious_self-determined.pdf")
 par(mar=c(5.1,5.1,4.1,2.1), cex=1.2, cex.axis=1.75, cex.lab=1.75, lwd=1.5)
 plotSystemActivities(dataComplete, types=c("self-determined", "conscientious"),
                      syst="OR",
-                     xlab=expression(p["A"^"+"]),
+                     xlab=expression(p^"+"),#expression(p["A"^"+"]),
                      col=c(SD.col, CS.col)
                                         #cex=1.5,cex.axis=2,cex.lab=2, lwd=1.5
                      )
@@ -180,7 +194,7 @@ pdf("ExtensionMemory_pAplus_agreeable_independent.pdf")
 par(mar=c(5.1,5.1,4.1,2.1), cex=1.2, cex.axis=1.75, cex.lab=1.75, lwd=1.5)
 plotSystemActivities(dataComplete, types=c("agreeable", "independent"),
                      syst="EM",
-                     xlab=expression(p["A"^"+"]),
+                     xlab=expression(p^"+"),#expression(p["A"^"+"]),
                      col=c(AG.col, IN.col)
                                         #cex=1.5,cex.axis=2,cex.lab=2, lwd=1.5
                      )
@@ -193,7 +207,7 @@ pdf("ExtensionMemory_pAplus_conscientious_self-determined.pdf")
 par(mar=c(5.1,5.1,4.1,2.1), cex=1.2, cex.axis=1.75, cex.lab=1.75, lwd=1.5)
 plotSystemActivities(dataComplete, types=c("self-determined", "conscientious"),
                      syst="EM",
-                     xlab=expression(p["A"^"+"]),
+                     xlab=expression(p^"+"),#expression(p["A"^"+"]),
                      col=c(SD.col, CS.col)
                                         #cex=1.5,cex.axis=2,cex.lab=2, lwd=1.5
                      )
@@ -212,7 +226,7 @@ pdf("IntuitiveBehaviour_pAplus_agreeable_independent.pdf")
 par(mar=c(5.1,5.1,4.1,2.1), cex=1.2, cex.axis=1.75, cex.lab=1.75, lwd=1.5)
 plotSystemActivities(dataComplete, types=c("agreeable", "independent"),
                      syst="IB",
-                     xlab=expression(p["A"^"+"]),
+                     xlab=expression(p^"+"),#expression(p["A"^"+"]),
                      col=c(AG.col, IN.col)
                                         #cex=1.5,cex.axis=2,cex.lab=2, lwd=1.5
                      )
@@ -225,7 +239,7 @@ pdf("IntuitiveBehaviour_pAplus_conscientious_self-determined.pdf")
 par(mar=c(5.1,5.1,4.1,2.1), cex=1.2, cex.axis=1.75, cex.lab=1.75, lwd=1.5)
 plotSystemActivities(dataComplete, types=c("self-determined", "conscientious"),
                      syst="IB",
-                     xlab=expression(p["A"^"+"]),
+                     xlab=expression(p^"+"),#expression(p["A"^"+"]),
                      col=c(SD.col, CS.col)
                                         #cex=1.5,cex.axis=2,cex.lab=2, lwd=1.5
                      )
@@ -241,7 +255,7 @@ pdf("IntentionMemory_pAplus_agreeable_independent.pdf")
 par(mar=c(5.1,5.1,4.1,2.1), cex=1.2, cex.axis=1.75, cex.lab=1.75, lwd=1.5)
 plotSystemActivities(dataComplete, types=c("agreeable", "independent"),
                      syst="IM",
-                     xlab=expression(p["A"^"+"]),
+                     xlab=expression(p^"+"),#expression(p["A"^"+"]),
                      col=c(AG.col, IN.col)
                                         #cex=1.5,cex.axis=2,cex.lab=2, lwd=1.5
                      )
@@ -254,7 +268,7 @@ pdf("IntentionMemory_pAplus_conscientious_self-determined.pdf")
 par(mar=c(5.1,5.1,4.1,2.1), cex=1.2, cex.axis=1.75, cex.lab=1.75, lwd=1.5)
 plotSystemActivities(dataComplete, types=c("self-determined", "conscientious"),
                      syst="IM",
-                     xlab=expression(p["A"^"+"]),
+                     xlab=expression(p^"+"),#expression(p["A"^"+"]),
                      col=c(SD.col, CS.col)
                                         #cex=1.5,cex.axis=2,cex.lab=2, lwd=1.5
                      )
@@ -272,7 +286,7 @@ legend("bottomright", legend=c("conscientious", "self-determined"), col=2:3, lty
 
 ###################################
 
-boxplot(
+ boxplot(
 subset(dataComplete, select=c(EM, OR, IM,IB),
        subset=(type=="agreeable") & (pAplus==0.5)),
 col=c("yellow", "blue", "red", "green")
@@ -409,7 +423,7 @@ boxplot(split(datp01$EM, datp01$type)[1], at=0.1, boxwex=0.2, add=TRUE)
 ## Linear slopes
 (EMactmatrix[5,]-EMactmatrix[1,])/(0.9-0.1)
 
-round((EMactmatrix[5,]-EMactmatrix[1,])/(0.9-0.1), 3)
+ round((EMactmatrix[5,]-EMactmatrix[1,])/(0.9-0.1), 3)
 
 boxplot( list(datp01$EM, datp03$EM), at=c(0.1,0.3), boxwex=0.2)
 
