@@ -1,0 +1,6 @@
+# Executables
+*.o
+psi
+psiDet
+.DS_Store
+
