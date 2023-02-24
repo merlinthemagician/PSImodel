@@ -4,7 +4,7 @@
  * psi.c
  *
  *
- * Implementation of Broecker's and Kuhl's PSI model Broecker (2013),
+ * Implementation of Broecker's and Kuhl's PSI model Broecker (2000),
  * p.63
  * 
  *
@@ -30,5 +30,6 @@ typedef struct {
   double Delta;
 } psi_pars;
 
+/* Implementation of the ODE system by Broecker (2000) */
 int psi(double t, const double y[], double dydt[], void * pars);
 #endif

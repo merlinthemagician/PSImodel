@@ -1,3 +1,6 @@
+######################################################################
+## Loading files containing the simulation results.
+######################################################################
 prefsDat <- c("AUC_PSI_spp1025_spm045_smp075_smm075_bp0_bn0_",
            "AUC_PSI_spp045_spm1025_smp075_smm075_bp0_bn0_",
            "AUC_PSI_spp075_spm075_smp045_smm1025_bp0_bn0_",
@@ -7,8 +10,8 @@ typesDat <- c("agreeable", "independent", "self-determined", "conscientious")
 
 sufP05 <- "prAplus05_tend1000.dat"
 
-# Compiles data of personality types with prefixes prefs and typenames
-# and one common suffix
+## Compiles data of personality types with a vector of prefixes (prefs)
+## and personality type names (typenames) as well as one common suffix
 readPTtypes <- function(prefs, typenames, suf) {
     fn <- sprintf("%s%s", prefs[1], suf)
     data <- read.table(fn, header=TRUE, sep="\t")
@@ -114,8 +117,10 @@ for( p in unique(dataComplete$pAplus) ) {
             at=p, add=TRUE, boxwex=0.1, xaxt="n")
 }
 
-### Function for generating arbitrary plots of system activity for
-### different personality types against pAplus.
+######################################################################
+## Function for generating arbitrary plots of system activity for
+## different personality types against pAplus.
+######################################################################
 plotSystemActivities <- function(data, types, syst="EM", col=seq_along(types)+1,
                                  ...) {
     EMactivityMeans <- aggregate(
@@ -146,10 +151,15 @@ plotSystemActivities <- function(data, types, syst="EM", col=seq_along(types)+1,
     ##        lty="solid")
 }
 
+## Define colours for different personality types
 AG.col <- "green"
 IN.col <- "red"
 CS.col <- "blue"
 SD.col <- "yellow"
+
+######################################################################
+## Generate plots
+######################################################################
 
 # OR
 plotSystemActivities(dataComplete, types=unique(dataComplete$type),syst="OR",
@@ -454,9 +464,9 @@ boxplot(split(datp05$EM, datp01$type),main="EM", ylim=c(-0.4,0.4))
 dev.new()
 boxplot(split(datp07$EM, datp01$type),main="EM", ylim=c(-0.4,0.4))
 
-
-## Linear relationship between affect bias and AUCs
-##
+######################################################################
+## Generate plots showing linear relationship between p^+ and AUCs
+######################################################################
 EMactmatrix <- rbind(
 sapply(split(datp01$EM, datp01$type), mean),
 sapply(split(datp03$EM, datp03$type), mean),
@@ -617,5 +627,3 @@ data.long <- melt(data, id="type")
 
 ggplot(data.long, aes(x = variable, y = value, color = type)) +  # ggplot function
   geom_boxplot()
-
-### Prob07

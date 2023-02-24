@@ -2,7 +2,7 @@
  * psi.c
  *
  *
- * Implementation of Broecker's and Kuhl's PSI model Broecker (2013),
+ * Implementation of Broecker's and Kuhl's PSI model Broecker (2000),
  * p.63
  * 
  *
@@ -31,17 +31,19 @@
 static  double a=0.275;
 static  double deltaT=10;
 
-static  double deltaPertT=50/* 20 */;
+#ifdef TEST
+static  double deltaPertT=50;
 static  double probPertPlus=0.5;
+static  double pertT=0;
+#endif
 
 static  double aPlusPert[NPERT]={20,140};
 static  size_t naPlus=2;
 static  double aMinusPert[NPERT]={60};
 static  size_t naMinus=1;
-static  double pertT=0;
 
 
-/* Perturbation */
+/* General form of a perturbation */
 double pert(double t, double t0, double Delta, double scale) {
   if( (t<=t0) || (t>=t0+Delta) ) return 0;
 
@@ -96,12 +98,12 @@ int psi(double t, const double y[], double dydt[], void * pars) {
   
   psi_pars* par=(psi_pars*)pars;
 
-  const double Delta=8;
-
+#ifndef DET
   int k;
-
+#endif
   
-  /*generate affect*/
+  /*generate affect (either for pre-defined scenario (DET) or
+    according to Poisson process). */
 #ifdef DET
   btP = pert(t, 20, deltaT, a) + pert(t, 140, deltaT, a);
 #else
@@ -126,6 +128,7 @@ int psi(double t, const double y[], double dydt[], void * pars) {
   dydt[2] = (1-v/(bplus*s))*p;
   dydt[3] = -(4.0-bplus)*(4-bplus)*v+bplus*p*p;
 
+  /* For calculating the area under the curve */
   /* Subtract steady state */
   dydt[4] = f-3;
   dydt[5] = e-1;
@@ -157,7 +160,6 @@ gsl_odeiv2_system psi_Model = {psi, NULL,
 int main(int argc, char **argv) {
   const char *titles="t\tEM\tOR\tIM\tIB\tEM_A\tOR_A\tIM_A\tIB_A\tApPert\tAmPert\tAp\tAm";
   double tend=200;
-  /* double y[]={3, 1, 3, 1}; */
   double y[]={3, 1, 3, 1, 0, 0, 0, 0};
   double t=0;
   double ht=0.1;
@@ -165,12 +167,12 @@ int main(int argc, char **argv) {
   int i;
 
   gsl_odeiv2_driver *d = gsl_odeiv2_driver_alloc_y_new (&psi_Model,
-							gsl_odeiv2_step_rkf45/* gsl_odeiv2_step_msbdf *//* gsl_odeiv2_step_bsimp *//* gsl_odeiv2_step_rk8pd */,
+							gsl_odeiv2_step_rkf45,
 							 1e-12, 1e-12, 0.0);
 
   gsl_rng *r;
 
-  /* gsl_rng_set(r,42); */
+  /* Get seed for random number generator from environment variable */
   gsl_rng_env_setup();
 
   r=gsl_rng_alloc(gsl_rng_taus);
@@ -216,12 +218,12 @@ int main(int argc, char **argv) {
   fprintf(ERR, "\nInitial conditions:\n");
   fprintf(ERR, "EM0=%g, OR0=%g,IM0=%g, IB0=%g\n",
   	  y[0],y[1],y[2],y[3]); 
-  
+
+  /* Output header */
   fprintf(OUT, "%s\n", titles);
   fprintf(OUT, "%g\t%g\t%g\t%g\t%g\t%g\t%g\t%g\t%g\n", 0.0, y[0], y[1], y[2], y[3], y[4], y[5], y[6], y[7]);
 
   /* Initialise perturbations */
-  
   pertT=gsl_ran_exponential(r, deltaPertT);
   while(pertT<=tend) {
     if(gsl_rng_uniform(r) < probPertPlus) {
@@ -232,6 +234,7 @@ int main(int argc, char **argv) {
     }
     pertT+=gsl_ran_exponential(r, deltaPertT);
   }
+  /* OPTIONAL: Output of perturbations */
   /* fprintf(ERR, "Aplus perturbations:\n"); */
   /* for(i=0; i<naPlus-1; i++) { */
   /*   fprintf(ERR, "%g\t", aPlusPert[i]); */
@@ -246,7 +249,7 @@ int main(int argc, char **argv) {
 
   for (i = 1; i*ht <= tend; i++)
     {
-      double ti = i*ht /* * tend / 100.0 */;
+      double ti = i*ht;
       int status = gsl_odeiv2_driver_apply (d, &t, ti, y);
       int k;
 
@@ -295,6 +298,7 @@ int main(int argc, char **argv) {
 
   gsl_rng_free(r);
 
+  /* Output AUC divided by time interval. */
   /* fprintf(ERR, "EM_A\tOR_A\tIM_A\tIB_A\n"); */
   for(i=PSI_D-4; i<PSI_D-1; i++) {
     fprintf(ERR, "%g\t", y[i]/tend);
