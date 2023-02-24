@@ -7,7 +7,7 @@ The PSI model describes the dynamics of the activity levels of the four cognitiv
 
 The parameters of the model are
 
- - the four sensitivities to down- or upregulating negative or positive affect, respectively - $s^+_{Down}$,  $s^+_{Up}$, $s^-_{Down}$ and $s^-_{Up}$. 
+ - the four sensitivities to down- or upregulating negative or positive affect, respectively - $s^{+}_{Down}$,  $s^{+}_{Up}$, $s^{-}_{Down}$ and $s^{-}_{Up}$. 
  
  - tonic positive and negative affect, $b^+_t$ and $b^-_t$ determine if positive or negative are permanently increased or decreased. 
  
