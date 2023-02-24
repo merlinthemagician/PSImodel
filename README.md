@@ -7,7 +7,7 @@ The PSI model describes the dynamics of the activity levels of the four cognitiv
 
 The parameters of the model are
 
- - the four sensitivities to down- or upregulating negative or positive affect, respectively - $s^+_{\text{Down}}$,  $s^+_{\text{Up}}$, $s^-_{\text{Down}}$ and $s^-_{\text{Up}}$. 
+ - the four sensitivities to down- or upregulating negative or positive affect, respectively - $s^+_{Down}$,  $s^+_{Up}$, $s^-_{Down}$ and $s^-_{Up}$. 
  
  - tonic positive and negative affect, $b^+_t$ and $b^-_t$ determine if positive or negative are permanently increased or decreased. 
  
@@ -23,7 +23,7 @@ Both executables, `psi` and `psiDet` are implemented in the same file, `psi.c`.
    
    Usage: `./psi sPUp sPDown sMUp sMDown bPt bMt tend pPlus`
  
- - psiDet: Solves the PSI model for a fixed sequence of affect perturbations. Here, `sPUp sPDown sMUp sMDown` are the affect sensitivities and ` bPt bMt` are tonic positive and tonic negative affect, respectively.   
+ - psiDet: Solves the PSI model for a fixed sequence of affect perturbations. Here, `sPUp sPDown sMUp sMDown` are the affect sensitivities and `bPt bMt` are tonic positive and tonic negative affect, respectively.   
    
     Usage: `./psi sPup sPDown sMUp sMDown bPt bMt`  
  
