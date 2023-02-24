@@ -7,11 +7,11 @@ The PSI model describes the dynamics of the activity levels of the four cognitiv
 
 The parameters of the model are
 
- - the four sensitivities to down- or upregulating negative or positive affect, respectively - s^+^~Down~,  s^+^~Up~, s^-^~Down~ and s^-^~Up~. 
+ - the four sensitivities to down- or upregulating negative or positive affect, respectively - $s^+_{\text{Down}}$,  $s^+_{\text{Up}}$, $s^-_{\text{Down}}$ and $s^-_{\text{Up}}$. 
  
- - tonic positive and negative affect, b^+^~t~ and b^-^~t~ determine if positive or negative are permanently increased or decreased. 
+ - tonic positive and negative affect, $b^+_t$ and $b^-_t$ determine if positive or negative are permanently increased or decreased. 
  
- - The probability p^+^ that an affect perturbation generates positive rather than negative affect. 
+ - The probability $p^+$ that an affect perturbation generates positive rather than negative affect. 
 
 ### Numerical solution of the PSI model
 
@@ -30,9 +30,12 @@ Both executables, `psi` and `psiDet` are implemented in the same file, `psi.c`.
  
 ### Plotting
  
- Solutions of the model can be plotted using `gnuplot` by running the shell scripts `plot_psi.plt` and `plot_psiDet.plt`. 
+ Solutions of the model can be plotted using `gnuplot` by running the shell scripts `scripts/plot_psi.plt` and `scripts/plot_psiDet.plt`. 
  
-### Statistical analysis of the activities of the cognitive systems for stochastic affect perturbations
+### Statistical analysis of the activities of the cognitive systems
+
+The shell script `scripts/psiStats.sh` generates simulations for different parameter sets which can be statistically evaluated and plotted using the R script `scripts/evaluatePSIstats.r`.
+
  
  
 
