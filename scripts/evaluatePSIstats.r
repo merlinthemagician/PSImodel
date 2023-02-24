@@ -151,12 +151,86 @@ IN.col <- "red"
 CS.col <- "blue"
 SD.col <- "yellow"
 
+# OR
 plotSystemActivities(dataComplete, types=unique(dataComplete$type),syst="OR",
-                     xlab=expression(p["A"^"+"]))
+                     xlab=expression(p^"+"),#expression(p["A"^"+"]),
+                     col=c(AG.col, IN.col, SD.col, CS.col))
+legend("bottomleft", legend=unique(dataComplete$type),
+       col=c(AG.col, IN.col, SD.col, CS.col),lty="solid",
+       cex=1.2)
+
+pdf("ObjectRecognition_pAplus_agreeable_independent_selfdetermined_conscientious.pdf")
+par(mar=c(5.1,5.1,4.1,2.1), cex=1.2, cex.axis=1.75, cex.lab=1.75, lwd=1.5)
+plotSystemActivities(dataComplete, types=unique(dataComplete$type),syst="OR",
+                     xlab=expression(p^"+"),#expression(p["A"^"+"]),
+                     col=c(AG.col, IN.col, SD.col, CS.col))
+legend("bottomleft", legend=unique(dataComplete$type),
+       col=c(AG.col, IN.col, SD.col, CS.col),lty="solid",
+       cex=1.2)
+dev.off()
+
+## EM
+dev.new()
+plotSystemActivities(dataComplete, types=unique(dataComplete$type),syst="EM",
+                     xlab=expression(p^"+"),#expression(p["A"^"+"]),
+                     col=c(AG.col, IN.col, SD.col, CS.col))
+legend("bottomright", legend=unique(dataComplete$type),
+       col=c(AG.col, IN.col, SD.col, CS.col),lty="solid",
+       cex=1.2)
+
+pdf("ExtensionMemory_pAplus_agreeable_independent_selfdetermined_conscientious.pdf")
+par(mar=c(5.1,5.1,4.1,2.1), cex=1.2, cex.axis=1.75, cex.lab=1.75, lwd=1.5)
+plotSystemActivities(dataComplete, types=unique(dataComplete$type),syst="EM",
+                     xlab=expression(p^"+"),#expression(p["A"^"+"]),
+                     col=c(AG.col, IN.col, SD.col, CS.col))
+legend("bottomright", legend=unique(dataComplete$type),
+       col=c(AG.col, IN.col, SD.col, CS.col),lty="solid",
+       cex=1.2)
+dev.off()
+
+## IB
+dev.new()
+plotSystemActivities(dataComplete, types=unique(dataComplete$type),syst="IB",
+                     xlab=expression(p^"+"),#expression(p["A"^"+"]),
+                     col=c(AG.col, IN.col, SD.col, CS.col))
+legend("bottomright", legend=unique(dataComplete$type),
+       col=c(AG.col, IN.col, SD.col, CS.col),lty="solid",
+       cex=1.2)
+
+pdf("IntuitiveBehaviour_pAplus_agreeable_independent_selfdetermined_conscientious.pdf")
+par(mar=c(5.1,5.1,4.1,2.1), cex=1.2, cex.axis=1.75, cex.lab=1.75, lwd=1.5)
+plotSystemActivities(dataComplete, types=unique(dataComplete$type),syst="IB",
+                     xlab=expression(p^"+"),#expression(p["A"^"+"]),
+                     col=c(AG.col, IN.col, SD.col, CS.col))
+legend("bottomright", legend=unique(dataComplete$type),
+       col=c(AG.col, IN.col, SD.col, CS.col),lty="solid",
+       cex=1.2)
+dev.off()
+
+
+## IM
+dev.new()
+plotSystemActivities(dataComplete, types=unique(dataComplete$type),syst="IM",
+                     xlab=expression(p^"+"),#expression(p["A"^"+"]),
+                     col=c(AG.col, IN.col, SD.col, CS.col))
+legend("bottomleft", legend=unique(dataComplete$type),
+       col=c(AG.col, IN.col, SD.col, CS.col),lty="solid",
+       cex=1.2)
+
+pdf("IntentionMemory_pAplus_agreeable_independent_selfdetermined_conscientious.pdf")
+par(mar=c(5.1,5.1,4.1,2.1), cex=1.2, cex.axis=1.75, cex.lab=1.75, lwd=1.5)
+plotSystemActivities(dataComplete, types=unique(dataComplete$type),syst="IM",
+                     xlab=expression(p^"+"),#expression(p["A"^"+"]),
+                     col=c(AG.col, IN.col, SD.col, CS.col))
+legend("bottomleft", legend=unique(dataComplete$type),
+       col=c(AG.col, IN.col, SD.col, CS.col),lty="solid",
+       cex=1.2)
+dev.off()
+###
 
 plotSystemActivities(dataComplete, types=c("agreeable", "independent"), syst="IM", col=c(AG.col, IN.col))
 
-### Object Recognition (IB)
+### Object Recognition (OR)
 
 pdf("ObjectRecognition_pAplus_agreeable_independent.pdf")
 par(mar=c(5.1,5.1,4.1,2.1), cex=1.2, cex.axis=1.75, cex.lab=1.75, lwd=1.5)
