@@ -19,7 +19,7 @@ The PSI model by Bröcker (2000), extended as described in Hoy et al. (2023), is
 
 Both executables, `psi` and `psiDet` are implemented in the same file, `psi.c`.
 
- - psi: Solves the PSI model where affect perturbations are generated via a Poisson process model. Here, `sPUp sPDown sMUp sMDown` are the affect sensitivities, ` bPt bMt` are tonic positive and tonic negative affect, respectively, `tend` is the simulation time and `pPlus` is the probability of positive affect perturbations.   
+ - psi: Solves the PSI model where affect perturbations are generated via a Poisson process model. Here, `sPUp sPDown sMUp sMDown` are the affect sensitivities, `bPt bMt` are tonic positive and tonic negative affect, respectively, `tend` is the simulation time and `pPlus` is the probability of positive affect perturbations.   
    
    Usage: `./psi sPUp sPDown sMUp sMDown bPt bMt tend pPlus`
  
